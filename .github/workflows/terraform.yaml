@@ -26,8 +26,6 @@ jobs:
         id: fmt
         run: terraform fmt -check -recursive
         continue-on-error: true
-        with:
-          cli_config_credentials_token: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Post Format
         if: always() && github.ref != 'refs/heads/master' && (steps.fmt.outcome == 'success' || steps.fmt.outcome == 'failure')
