@@ -60,7 +60,7 @@ jobs:
       with:
         # tell the action the plan outputs
         terraform-text: ${{ github.workspace }}/terraform.text
-        terraform-json: ${{ github.workspace }}/terraform.json
+        # terraform-json: ${{ github.workspace }}/terraform.json
         remove-stale-reports: true
 
       # On push to main, build or change infrastructure according to Terraform configuration files
