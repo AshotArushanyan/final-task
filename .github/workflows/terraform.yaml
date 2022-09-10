@@ -35,18 +35,28 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -lock=false -out terraform.plan
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     # generate plain output
     - run: terraform show -no-color terraform.plan > terraform.text
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     # generate json output
     - run: terraform show -json terraform.plan > terraform.json
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - uses: ahmadnassri/action-terraform-report@v3
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       with:
         # tell the action the plan outputs
         terraform-text: ${{ github.workspace }}/terraform.text
